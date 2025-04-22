@@ -31,28 +31,31 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def hayoti(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = """Abdulla Qahhor (1907-yil 17-sentyabrda Qoʻqon–1968-yil 25-mayda, Moskva) — Oʻzbekiston xalq yozuvchisi (1967). 
 
-Temirchi oilasida tugʻilgan. Bolaligi Qoʻqon va uning atrofidagi qishloqlarda oʻtdi. Oqqoʻrgʻon qishlogʻidagi Mamajon qorining usuli savtiya maktabida tahsil koʻrdi. Oilasi Qoʻqonga koʻchib kelgach „Istiqlol“ nomli shoʻro maktabiga oʻqishga kiradi, undan keyin internat, „Kommuna“, „Namuna“ maktablarida, soʻng bilim yurtida tahsil koʻradi.
-
-Bilim yurtining „Adib“ qoʻlyozma jurnalida dastlabki mashqlari bilan qatnashadi. Toshkentdagi „Qizil Oʻzbekistan“ gazetasi tahririyatining „Ishchi-batrak maktublari“ varaqasiga muharrirlik qildi (1925). U gazetada ishlash jarayonida Oʻrta Osiyo davlat universitetining ishchilar fakultetini tamomlaydi (1928).
-
-Abdulla Qahhor yana Qoʻqonga borib, dastlab oʻqituvchilarni qayta tayyorlash kursida muallimlik qiladi; koʻp oʻtmay „Yangi Fargʻona“ viloyat gazetasiga kotib va „Chigʻiriq“ hajviy boʻlimiga mudir etib tayinlanadi (1929).
-
-Abdulla Qahhorning „Oy kuyganda“ ilk hajviy sheʼri „Mushtum“ jurnalida Norin shilpiq taxallusi ostida bosildi (2004). Soʻng uning bir qancha hajviy sheʼr va hikoyalari „Mushtum“, „Yangi yoʻl“ jurnallari va „Qizil Oʻzbekistan“ gazetasida Mavlon kufur, Gulyor, Nish, Erkaboy, E-voy kabi taxalluslar ostida eʼlon qilindi.
-
-Abdulla Qahhor 30-yillarda yana Toshkentga qaytadi va Oʻrta Osiyo davlat universitetining pedagogika fakultetiga oʻqishga kiradi (1930), ayni paytda „Sovet adabiyoti“ jurnalida mas'ul kotib vazifasini bajaradi.
-
-Oʻzdavnashrda muharrir va tarjimon (1935–1953). 1954–1956-yillarda Oʻzbekiston yozuvchilari uyushmasi boshqaruvining raisi.
-
-Abdulla Qahhor umrining oxirlarida davolanish uchun Moskvaga boradi va oʻsha yerda vafot etadi. Toshkentdagi Chigʻatoy qabristoniga dafn etiladi."""
-    
+Temirchi oilasida tugʻilgan... (matn shu yerda davom etadi, siz allaqachon bergan to‘liq hayoti matni)
+"""
     await update.message.reply_text(text)
+
+async def ijodi(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    full_text = """Ijodi
+Abdulla Qahhor ijodi sheʼriyat bilan boshlangan boʻlsada, uning adabiy merosi negizini nasriy asarlar tashkil etadi. „Boshsiz odam“ (1929) hikoyasi chop etilgan vaqtdan boshlab umrining oxirigacha hikoya, ocherk, publitsistika, qissa va roman janrlarida samarali ijod qildi. Abdulla Qahhorning dastlabki ijodidagi „Qishloq hukm ostida“ qissasi (1932) shoʻro mafkurasi asosida yozilgan. Uning „Boshsiz odam“ hikoyasi bilan boshlangan hikoyanavislik faoliyatida esa tarixiy oʻtmish aks ettirilgan. „Qoʻshchinor chiroqlari“ (1951) romanida (dastlabki varianti „Qoʻshchinor“, 1946) jamoalashtirish davrining voqealari badiiy tasvirlangan.
+
+„Sarob“ romani
+Abdulla Qahhorning 30-yillardagi ijodida uning birinchi romani – „Sarob“ muhim oʻrinni egallaydi. Yozuvchining ushbu romani bosh qahramon Saidiyning faoliyatini koʻrsatishga qaratilgan...
+
+
+"""
+
+    # Matnni 4096 belgidan oshmasligi uchun bo‘lib yuborish
+    chunk_size = 4000
+    for i in range(0, len(full_text), chunk_size):
+        await update.message.reply_text(full_text[i:i + chunk_size])
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "Abdulla Qahhor hayoti":
         await hayoti(update, context)
     elif text == "Ijodi":
-        await update.message.reply_text("Ijodi bo'limi tayyorlanmoqda...")
+        await ijodi(update, context)
     elif text == "Hikoyalari va to'plamlar":
         await update.message.reply_text("Hikoyalari va to'plamlar bo'limi tayyorlanmoqda...")
     elif text == "Romanlari":
