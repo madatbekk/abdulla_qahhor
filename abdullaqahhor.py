@@ -1,8 +1,11 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
+
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, MenuButtonCommands
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes
 from telegram.ext import filters
-
-TOKEN = "7671995152:AAEe-UEx1QxMMFl05zezurpAA3PVRJxpgJw"
 
 async def set_menu_button(update: Update):
     await update.get_bot().set_chat_menu_button(
@@ -13,7 +16,7 @@ async def set_menu_button(update: Update):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.message.from_user
     welcome_message = f"Assalomu alaykum {user.first_name}, botga xush kelibsiz!\n\nMen Abdulla Qahhorning hayoti va ijodi haqida ma'lumot beruvchi botman. Quyidagi bo'limlardan o'zingizga keraklisini tanlang."
-    
+
     menu_buttons = [
         [KeyboardButton("Abdulla Qahhor hayoti")],
         [KeyboardButton("Ijodi")],
@@ -28,19 +31,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def hayoti(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = """Abdulla Qahhor (1907-yil 17-sentyabrda Qoʻqon–1968-yil 25-mayda, Moskva) — Oʻzbekiston xalq yozuvchisi (1967). 
 
-Temirchi oilasida tugʻilgan. Bolaligi Qoʻqon va uning atrofidagi qishloqlarda oʻtdi. Oqqoʻrgʻon qishlogʻidagi Mamajon qorining usuli savtiya maktabida tahsil koʻrdi. Oilasi Qoʻqonga koʻchib kelgach „Istiqlol“ nomli shoʻro maktabiga oʻqishga kiradi, undan keyin internat, „Kommuna“, „Namuna“ maktablarida, soʻng bilim yurtida tahsil koʻradi. 
+Temirchi oilasida tugʻilgan. Bolaligi Qoʻqon va uning atrofidagi qishloqlarda oʻtdi. Oqqoʻrgʻon qishlogʻidagi Mamajon qorining usuli savtiya maktabida tahsil koʻrdi. Oilasi Qoʻqonga koʻchib kelgach „Istiqlol“ nomli shoʻro maktabiga oʻqishga kiradi, undan keyin internat, „Kommuna“, „Namuna“ maktablarida, soʻng bilim yurtida tahsil koʻradi.
 
-Bilim yurtining „Adib“ qoʻlyozma jurnalida dastlabki mashqlari bilan qatnashadi. Toshkentdagi „Qizil Oʻzbekistan“ gazetasi tahririyatining „Ishchi-batrak maktublari“ varaqasiga muharrirlik qildi (1925). U gazetada ishlash jarayonida Oʻrta Osiyo davlat universitetining ishchilar fakultetini tamomlaydi (1928). 
+Bilim yurtining „Adib“ qoʻlyozma jurnalida dastlabki mashqlari bilan qatnashadi. Toshkentdagi „Qizil Oʻzbekistan“ gazetasi tahririyatining „Ishchi-batrak maktublari“ varaqasiga muharrirlik qildi (1925). U gazetada ishlash jarayonida Oʻrta Osiyo davlat universitetining ishchilar fakultetini tamomlaydi (1928).
 
-Abdulla Qahhor yana Qoʻqonga borib, dastlab oʻqituvchilarni qayta tayyorlash kursida muallimlik qiladi; koʻp oʻtmay „Yangi Fargʻona“ viloyat gazetasiga kotib va „Chigʻiriq“ hajviy boʻlimiga mudir etib tayinlanadi (1929). 
+Abdulla Qahhor yana Qoʻqonga borib, dastlab oʻqituvchilarni qayta tayyorlash kursida muallimlik qiladi; koʻp oʻtmay „Yangi Fargʻona“ viloyat gazetasiga kotib va „Chigʻiriq“ hajviy boʻlimiga mudir etib tayinlanadi (1929).
 
-Abdulla Qahhorning „Oy kuyganda“ ilk hajviy sheʼri „Mushtum“ jurnalida Norin shilpiq taxallusi ostida bosildi (2004). Soʻng uning bir qancha hajviy sheʼr va hikoyalari „Mushtum“, „Yangi yoʻl“ jurnallari va „Qizil Oʻzbekistan“ gazetasida Mavlon kufur, Gulyor, Nish, Erkaboy, E-voy kabi taxalluslar ostida eʼlon qilindi. 
+Abdulla Qahhorning „Oy kuyganda“ ilk hajviy sheʼri „Mushtum“ jurnalida Norin shilpiq taxallusi ostida bosildi (2004). Soʻng uning bir qancha hajviy sheʼr va hikoyalari „Mushtum“, „Yangi yoʻl“ jurnallari va „Qizil Oʻzbekistan“ gazetasida Mavlon kufur, Gulyor, Nish, Erkaboy, E-voy kabi taxalluslar ostida eʼlon qilindi.
 
-Abdulla Qahhor 30-yillarda yana Toshkentga qaytadi va Oʻrta Osiyo davlat universitetining pedagogika fakultetiga oʻqishga kiradi (1930), ayni paytda „Sovet adabiyoti“ jurnalida mas'ul kotib vazifasini bajaradi. 
+Abdulla Qahhor 30-yillarda yana Toshkentga qaytadi va Oʻrta Osiyo davlat universitetining pedagogika fakultetiga oʻqishga kiradi (1930), ayni paytda „Sovet adabiyoti“ jurnalida mas'ul kotib vazifasini bajaradi.
 
-Oʻzdavnashrda muharrir va tarjimon (1935–1953). 1954–1956-yillarda Oʻzbekiston yozuvchilari uyushmasi boshqaruvining raisi. 
+Oʻzdavnashrda muharrir va tarjimon (1935–1953). 1954–1956-yillarda Oʻzbekiston yozuvchilari uyushmasi boshqaruvining raisi.
 
 Abdulla Qahhor umrining oxirlarida davolanish uchun Moskvaga boradi va oʻsha yerda vafot etadi. Toshkentdagi Chigʻatoy qabristoniga dafn etiladi."""
+    
     await update.message.reply_text(text)
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
