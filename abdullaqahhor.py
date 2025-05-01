@@ -53,6 +53,16 @@ Abdulla Qahhorning isteʼdodi uchun komediya janri ham yaqin edi. Buni sezgan yo
     for i in range(0, len(full_text), chunk_size):
         await update.message.reply_text(full_text[i:i + chunk_size])
 
+async def send_hikoyalar_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # GitHub'dagi PDF fayl manzili
+    pdf_url = "https://github.com/foydalanuvchi/repositoriy_nomi/raw/main/Hikoyalar.pdf"
+    await update.message.reply_document(document=pdf_url, caption="Abdulla Qahhorning hikoyalar to'plami")
+
+async def send_sarob_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # GitHub'dagi PDF fayl manzili
+    pdf_url = "https://github.com/foydalanuvchi/repositoriy_nomi/raw/main/Sarob_roman.pdf"
+    await update.message.reply_document(document=pdf_url, caption="Abdulla Qahhorning 'Sarob' romani")
+
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "Abdulla Qahhor hayoti":
@@ -60,9 +70,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif text == "Ijodi":
         await ijodi(update, context)
     elif text == "Hikoyalari va to'plamlar":
-        await update.message.reply_text("Hikoyalari va to'plamlar bo'limi tayyorlanmoqda...")
+        await send_hikoyalar_pdf(update, context)
     elif text == "Romanlari":
-        await update.message.reply_text("Romanlari bo'limi tayyorlanmoqda...")
+        await send_sarob_pdf(update, context)
     else:
         await update.message.reply_text("Noto'g'ri buyruq. Iltimos, menyudan tanlang.")
 
