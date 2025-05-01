@@ -55,12 +55,12 @@ Abdulla Qahhorning isteʼdodi uchun komediya janri ham yaqin edi. Buni sezgan yo
 
 async def send_hikoyalar_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # GitHub'dagi PDF fayl manzili
-    pdf_url = "https://github.com/madatbekk/abdullaqahhor/raw/main/Hikoyalar.pdf"
+    pdf_url = "https://github.com/madatbekk/abdullaqahhor/blob/main/Hikoyalar.pdf"
     await update.message.reply_document(document=pdf_url, caption="Abdulla Qahhorning hikoyalar to'plami")
 
 async def send_sarob_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # GitHub'dagi PDF fayl manzili
-    pdf_url = "https://github.com/madatbekk/abdullaqahhor/raw/main/Sarob_roman.pdf"
+    pdf_url = "https://github.com/madatbekk/abdullaqahhor/blob/main/Sarob_roman.pdf"
     await update.message.reply_document(document=pdf_url, caption="Abdulla Qahhorning 'Sarob' romani")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
